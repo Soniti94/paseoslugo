@@ -188,6 +188,7 @@ export default function Navbar() {
                     data-testid="register-password-input"
                   />
                 </div>
+                <p style={styles.roleNote}>Te registrarás como dueño de mascota. Si deseas ser paseador, contacta con nosotros.</p>
                 <Button type="submit" className="w-full" data-testid="register-submit-btn">Crear cuenta</Button>
                 <div style={styles.divider}>
                   <span>o</span>
