@@ -111,6 +111,11 @@ export default function Paseadores() {
                     <Award size={14} color="white" />
                   </div>
                 )}
+                {walker.is_featured && (
+                  <div style={styles.featuredBadge}>
+                    ⭐ DESTACADA
+                  </div>
+                )}
               </div>
 
               <div style={styles.cardContent}>
