@@ -304,6 +304,12 @@ const styles = {
     width: '18px',
     marginRight: '0.5rem',
   },
+  roleNote: {
+    fontSize: '0.875rem',
+    color: '#666',
+    fontStyle: 'italic',
+    marginTop: '-0.5rem',
+  },
   '@media (max-width: 768px)': {
     desktopMenu: {
       display: 'none',
