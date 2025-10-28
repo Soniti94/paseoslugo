@@ -224,14 +224,6 @@ export default function Landing() {
             >
               Encuentra un paseador
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => navigate('/paseadores')}
-              style={styles.ctaSecondaryLarge}
-              data-testid="cta-unete-paseador"
-            >
-              Únete como paseador
-            </Button>
           </div>
         </div>
       </section>
