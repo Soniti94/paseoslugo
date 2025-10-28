@@ -27,14 +27,6 @@ export default function Landing() {
               >
                 Encuentra un paseador
               </Button>
-              <Button
-                variant="outline"
-                onClick={() => navigate('/paseadores')}
-                style={styles.ctaSecondary}
-                data-testid="hero-cta-unirse"
-              >
-                Únete como paseador
-              </Button>
             </div>
             <div style={styles.trustSignals}>
               <div style={styles.trustItem}>
