@@ -266,6 +266,18 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  featuredBadge: {
+    position: 'absolute',
+    top: '1rem',
+    left: '1rem',
+    background: '#FF6B00',
+    color: 'white',
+    padding: '0.375rem 0.75rem',
+    borderRadius: '20px',
+    fontSize: '0.75rem',
+    fontWeight: 700,
+    letterSpacing: '0.5px',
+  },
   cardContent: {
     padding: '1.5rem',
   },
