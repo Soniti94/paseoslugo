@@ -51,6 +51,13 @@ export default function Paseadores() {
       filtered = filtered.filter(w => w.location === locationFilter);
     }
 
+    // Sort: featured walkers first, then by rating
+    filtered.sort((a, b) => {
+      if (a.is_featured && !b.is_featured) return -1;
+      if (!a.is_featured && b.is_featured) return 1;
+      return b.rating - a.rating;
+    });
+
     setFilteredWalkers(filtered);
   };
 
