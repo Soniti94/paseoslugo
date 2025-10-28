@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/contexts/AuthContext';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import Landing from '@/pages/Landing';
 import Paseadores from '@/pages/Paseadores';
 import PaseadorPerfil from '@/pages/PaseadorPerfil';
@@ -30,6 +31,7 @@ function App() {
             <Route path="/dashboard-paseador" element={<DashboardPaseador />} />
             <Route path="/en-paseo/:bookingId" element={<EnPaseo />} />
           </Routes>
+          <Footer />
           <Toaster position="top-center" />
         </BrowserRouter>
       </div>
