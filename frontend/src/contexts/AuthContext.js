@@ -64,18 +64,20 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const response = await axios.post(`${API}/auth/login`, { email, password });
     const { token: newToken, user: newUser } = response.data;
-    setToken(newToken);
-    setUser(newUser);
     localStorage.setItem('token', newToken);
+    setSkipValidation(true);
+    setUser(newUser);
+    setToken(newToken);
     return newUser;
   };
 
   const register = async (email, password, name, role = 'owner') => {
     const response = await axios.post(`${API}/auth/register`, { email, password, name, role });
     const { token: newToken, user: newUser } = response.data;
-    setToken(newToken);
-    setUser(newUser);
     localStorage.setItem('token', newToken);
+    setSkipValidation(true);
+    setUser(newUser);
+    setToken(newToken);
     return newUser;
   };
 
