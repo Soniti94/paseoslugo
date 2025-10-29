@@ -135,7 +135,7 @@ export default function Paseadores() {
 
                 <div style={styles.location}>
                   <MapPin size={16} color="#666" />
-                  <span>{walker.location}</span>
+                  <span>{typeof walker.location === 'string' ? walker.location : 'Centro de Lugo'}</span>
                   <span style={styles.experience}>{walker.experience_years} años</span>
                 </div>
 
