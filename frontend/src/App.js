@@ -16,6 +16,7 @@ import DashboardPaseador from '@/pages/DashboardPaseador';
 import EnPaseo from '@/pages/EnPaseo';
 import Perfil from '@/pages/Perfil';
 import Mensajes from '@/pages/Mensajes';
+import Contacto from '@/pages/Contacto';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import TermsOfService from '@/pages/TermsOfService';
 import CookiePolicy from '@/pages/CookiePolicy';
