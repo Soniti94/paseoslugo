@@ -159,7 +159,7 @@ export default function Seguimiento() {
                 <h3 style={styles.photosTitle}>
                   <Camera size={20} /> Fotos del paseo
                 </h3>
-                <div style={styles.photosGrid}>
+                <div style={styles.photosGrid} className="seguimiento-photos-grid">
                   {walk.photos.map((photo, idx) => (
                     <img
                       key={idx}
