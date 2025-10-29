@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dog, LogOut, User, Menu, X } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dog, LogOut, User, Menu, X, MessageSquare, ShoppingCart, UserCircle, Globe } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Navbar() {
   const { user, logout, login, register, loginWithGoogle } = useAuth();
+  const { language, setLanguage, t } = useLanguage();
   const navigate = useNavigate();
   const [showAuth, setShowAuth] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -25,9 +28,9 @@ export default function Navbar() {
     try {
       await login(loginEmail, loginPassword);
       setShowAuth(false);
-      toast.success('¡Bienvenido!');
+      toast.success(t('nav.welcomeBack') || '¡Bienvenido!');
     } catch (err) {
-      toast.error('Credenciales inválidas');
+      toast.error(t('nav.invalidCredentials') || 'Credenciales inválidas');
     }
   };
 
@@ -36,9 +39,9 @@ export default function Navbar() {
     try {
       await register(regEmail, regPassword, regName);
       setShowAuth(false);
-      toast.success('¡Cuenta creada con éxito!');
+      toast.success(t('nav.accountCreated') || '¡Cuenta creada con éxito!');
     } catch (err) {
-      toast.error('Error al registrar');
+      toast.error(t('nav.registerError') || 'Error al registrar');
     }
   };
 
@@ -46,7 +49,7 @@ export default function Navbar() {
     await logout();
     navigate('/');
     setShowMobileMenu(false);
-    toast.success('Sesión cerrada');
+    toast.success(t('nav.loggedOut') || 'Sesión cerrada');
   };
 
   const handleNavClick = (path) => {
@@ -60,14 +63,14 @@ export default function Navbar() {
         <div className="container" style={styles.navContainer}>
           <Link to="/" style={styles.logo} data-testid="navbar-logo">
             <Dog size={28} color="#FF6B00" />
-            <span style={styles.logoText}>PaseosLugo</span>
+            <span style={styles.logoText}>{t('common.appName')}</span>
           </Link>
 
           {/* Desktop Menu */}
           <div style={styles.desktopMenu} className="desktop-only">
-            <Link to="/paseadores" style={styles.navLink} data-testid="nav-paseadores">Paseadores</Link>
-            <Link to="/" style={styles.navLink}>Cómo funciona</Link>
-            <Link to="/" style={styles.navLink}>Contacto</Link>
+            <Link to="/paseadores" style={styles.navLink} data-testid="nav-paseadores">{t('nav.walkers')}</Link>
+            <Link to="/" style={styles.navLink}>{t('nav.howItWorks')}</Link>
+            <Link to="/" style={styles.navLink}>{t('nav.contact')}</Link>
           </div>
 
           {/* Desktop User Menu */}
@@ -75,25 +78,51 @@ export default function Navbar() {
             {user ? (
               <>
                 <div style={styles.userMenuDesktop} className="desktop-only">
-                  <span style={styles.userName} data-testid="user-name">{user.name}</span>
-                  <Button variant="outline" size="sm" onClick={() => navigate('/mis-reservas')} data-testid="nav-mis-reservas">
-                    Mis Reservas
-                  </Button>
-                  <Button variant="ghost" size="icon" onClick={handleLogout} data-testid="nav-logout">
-                    <LogOut size={18} />
-                  </Button>
+                  <button
+                    onClick={() => navigate('/mensajes')}
+                    style={styles.iconButton}
+                    data-testid="nav-messages"
+                  >
+                    <MessageSquare size={20} />
+                  </button>
+                  <button
+                    onClick={() => navigate('/mis-reservas')}
+                    style={styles.iconButton}
+                    data-testid="nav-cart"
+                  >
+                    <ShoppingCart size={20} />
+                  </button>
+                  <button
+                    onClick={() => navigate('/perfil')}
+                    style={styles.iconButton}
+                    data-testid="nav-profile"
+                  >
+                    <UserCircle size={20} />
+                  </button>
                 </div>
               </>
             ) : (
               <div style={styles.desktopButtons} className="desktop-only">
                 <Button onClick={() => setShowAuth(true)} style={styles.loginBtn} data-testid="nav-login-btn">
-                  Iniciar sesión
-                </Button>
-                <Button onClick={() => navigate('/paseadores')} className="btn-primary" style={styles.reservarBtn} data-testid="nav-reservar-btn">
-                  Reservar paseo
+                  {t('nav.login')}
                 </Button>
               </div>
             )}
+
+            {/* Language Selector */}
+            <div style={styles.languageSelector} className="desktop-only">
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger style={styles.langTrigger} data-testid="language-selector">
+                  <Globe size={16} style={{ marginRight: '0.5rem' }} />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="es">Español</SelectItem>
+                  <SelectItem value="gl">Galego</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
             {/* Mobile menu button */}
             <button style={styles.mobileMenuBtn} onClick={() => setShowMobileMenu(!showMobileMenu)} data-testid="mobile-menu-btn">
@@ -106,13 +135,13 @@ export default function Navbar() {
         {showMobileMenu && (
           <div style={styles.mobileMenuContent} data-testid="mobile-menu">
             <Link to="/paseadores" style={styles.mobileLink} onClick={() => handleNavClick('/paseadores')}>
-              Paseadores
+              {t('nav.walkers')}
             </Link>
             <Link to="/" style={styles.mobileLink} onClick={() => handleNavClick('/')}>
-              Cómo funciona
+              {t('nav.howItWorks')}
             </Link>
             <Link to="/" style={styles.mobileLink} onClick={() => handleNavClick('/')}>
-              Contacto
+              {t('nav.contact')}
             </Link>
             
             {user ? (
@@ -122,12 +151,21 @@ export default function Navbar() {
                   <User size={18} color="#FF6B00" />
                   <span>{user.name}</span>
                 </div>
+                <Link to="/mensajes" style={styles.mobileLink} onClick={() => handleNavClick('/mensajes')}>
+                  <MessageSquare size={18} style={{ marginRight: '0.5rem' }} />
+                  {t('nav.messages')}
+                </Link>
                 <Link to="/mis-reservas" style={styles.mobileLink} onClick={() => handleNavClick('/mis-reservas')}>
-                  Mis Reservas
+                  <ShoppingCart size={18} style={{ marginRight: '0.5rem' }} />
+                  {t('nav.myReservations')}
+                </Link>
+                <Link to="/perfil" style={styles.mobileLink} onClick={() => handleNavClick('/perfil')}>
+                  <UserCircle size={18} style={{ marginRight: '0.5rem' }} />
+                  {t('nav.profile')}
                 </Link>
                 <button style={styles.mobileLogoutBtn} onClick={handleLogout}>
                   <LogOut size={18} />
-                  <span>Cerrar sesión</span>
+                  <span>{t('nav.logout')}</span>
                 </button>
               </>
             ) : (
@@ -140,16 +178,25 @@ export default function Navbar() {
                     setShowMobileMenu(false);
                   }}
                 >
-                  Iniciar sesión
-                </button>
-                <button 
-                  style={styles.mobileReservarBtn}
-                  onClick={() => handleNavClick('/paseadores')}
-                >
-                  Reservar paseo
+                  {t('nav.login')}
                 </button>
               </>
             )}
+
+            <div style={styles.mobileDivider}></div>
+            <div style={styles.mobileLangSelector}>
+              <Globe size={18} style={{ marginRight: '0.5rem' }} />
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger style={styles.mobileLangTrigger}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="es">Español</SelectItem>
+                  <SelectItem value="gl">Galego</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         )}
       </nav>
@@ -157,13 +204,13 @@ export default function Navbar() {
       <Dialog open={showAuth} onOpenChange={setShowAuth}>
         <DialogContent data-testid="auth-dialog">
           <DialogHeader>
-            <DialogTitle>Iniciar sesión o registrarse</DialogTitle>
+            <DialogTitle>{t('nav.loginOrRegister') || 'Iniciar sesión o registrarse'}</DialogTitle>
           </DialogHeader>
           
           <Tabs defaultValue="login">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login" data-testid="login-tab">Iniciar sesión</TabsTrigger>
-              <TabsTrigger value="register" data-testid="register-tab">Registrarse</TabsTrigger>
+              <TabsTrigger value="login" data-testid="login-tab">{t('nav.login')}</TabsTrigger>
+              <TabsTrigger value="register" data-testid="register-tab">{t('nav.register')}</TabsTrigger>
             </TabsList>
             
             <TabsContent value="login">
@@ -180,7 +227,7 @@ export default function Navbar() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="login-password">Contraseña</Label>
+                  <Label htmlFor="login-password">{t('profile.password') || 'Contraseña'}</Label>
                   <Input
                     id="login-password"
                     type="password"
@@ -190,13 +237,13 @@ export default function Navbar() {
                     data-testid="login-password-input"
                   />
                 </div>
-                <Button type="submit" className="w-full" data-testid="login-submit-btn">Iniciar sesión</Button>
+                <Button type="submit" className="w-full" data-testid="login-submit-btn">{t('nav.login')}</Button>
                 <div style={styles.divider}>
-                  <span>o</span>
+                  <span>{t('common.or') || 'o'}</span>
                 </div>
                 <Button type="button" variant="outline" className="w-full" onClick={loginWithGoogle} data-testid="google-login-btn">
                   <img src="https://www.google.com/favicon.ico" alt="Google" style={styles.googleIcon} />
-                  Continuar con Google
+                  {t('nav.continueWithGoogle') || 'Continuar con Google'}
                 </Button>
               </form>
             </TabsContent>
@@ -204,7 +251,7 @@ export default function Navbar() {
             <TabsContent value="register">
               <form onSubmit={handleRegister} style={styles.form}>
                 <div>
-                  <Label htmlFor="reg-name">Nombre completo</Label>
+                  <Label htmlFor="reg-name">{t('profile.name')}</Label>
                   <Input
                     id="reg-name"
                     type="text"
@@ -226,7 +273,7 @@ export default function Navbar() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="reg-password">Contraseña</Label>
+                  <Label htmlFor="reg-password">{t('profile.password') || 'Contraseña'}</Label>
                   <Input
                     id="reg-password"
                     type="password"
@@ -236,14 +283,14 @@ export default function Navbar() {
                     data-testid="register-password-input"
                   />
                 </div>
-                <p style={styles.roleNote}>Te registrarás como dueño de mascota. Si deseas ser paseador, contacta con nosotros.</p>
-                <Button type="submit" className="w-full" data-testid="register-submit-btn">Crear cuenta</Button>
+                <p style={styles.roleNote}>{t('nav.registerAsOwner') || 'Te registrarás como dueño de mascota. Si deseas ser paseador, contacta con nosotros.'}</p>
+                <Button type="submit" className="w-full" data-testid="register-submit-btn">{t('nav.createAccount') || 'Crear cuenta'}</Button>
                 <div style={styles.divider}>
-                  <span>o</span>
+                  <span>{t('common.or') || 'o'}</span>
                 </div>
                 <Button type="button" variant="outline" className="w-full" onClick={loginWithGoogle} data-testid="google-register-btn">
                   <img src="https://www.google.com/favicon.ico" alt="Google" style={styles.googleIcon} />
-                  Continuar con Google
+                  {t('nav.continueWithGoogle') || 'Continuar con Google'}
                 </Button>
               </form>
             </TabsContent>
@@ -300,12 +347,19 @@ const styles = {
   userMenuDesktop: {
     display: 'flex',
     alignItems: 'center',
-    gap: '1rem',
+    gap: '0.75rem',
   },
-  userName: {
-    fontSize: '0.9375rem',
-    fontWeight: 500,
-    color: '#1a1a1a',
+  iconButton: {
+    background: 'transparent',
+    border: 'none',
+    color: '#4a4a4a',
+    cursor: 'pointer',
+    padding: '0.5rem',
+    borderRadius: '8px',
+    transition: 'all 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   desktopButtons: {
     display: 'flex',
@@ -319,8 +373,11 @@ const styles = {
     fontWeight: 600,
     cursor: 'pointer',
   },
-  reservarBtn: {
-    display: 'inline-block',
+  languageSelector: {
+    minWidth: '140px',
+  },
+  langTrigger: {
+    border: '1px solid #E5E7EB',
   },
   mobileMenuBtn: {
     display: 'block',
@@ -345,6 +402,8 @@ const styles = {
     padding: '0.75rem',
     borderRadius: '8px',
     transition: 'background 0.2s',
+    display: 'flex',
+    alignItems: 'center',
   },
   mobileDivider: {
     height: '1px',
@@ -372,17 +431,6 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.2s',
   },
-  mobileReservarBtn: {
-    background: '#FF6B00',
-    border: 'none',
-    color: 'white',
-    padding: '0.875rem',
-    borderRadius: '8px',
-    fontSize: '1rem',
-    fontWeight: 600,
-    cursor: 'pointer',
-    transition: 'background 0.2s',
-  },
   mobileLogoutBtn: {
     display: 'flex',
     alignItems: 'center',
@@ -397,6 +445,14 @@ const styles = {
     cursor: 'pointer',
     width: '100%',
     justifyContent: 'center',
+  },
+  mobileLangSelector: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0.75rem',
+  },
+  mobileLangTrigger: {
+    flex: 1,
   },
   form: {
     display: 'flex',
