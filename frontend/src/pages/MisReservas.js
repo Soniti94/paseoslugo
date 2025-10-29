@@ -235,13 +235,24 @@ export default function MisReservas() {
                 <div style={styles.bookingFooter}>
                   <span style={styles.bookingPrice}>{booking.amount}€</span>
                   {booking.status === 'confirmed' && (
-                    <Button
-                      size="sm"
-                      onClick={() => navigate(`/seguimiento/${booking.id}`)}
-                      data-testid="ver-seguimiento-btn"
-                    >
-                      Ver seguimiento
-                    </Button>
+                    <>
+                      <Button
+                        size="sm"
+                        onClick={() => navigate(`/seguimiento/${booking.id}`)}
+                        data-testid="ver-seguimiento-btn"
+                      >
+                        Ver seguimiento
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleCancelBooking(booking.id)}
+                        data-testid="cancel-booking-btn"
+                        style={{ borderColor: '#EF4444', color: '#EF4444' }}
+                      >
+                        Cancelar
+                      </Button>
+                    </>
                   )}
                   {booking.status === 'in_progress' && (
                     <Button
