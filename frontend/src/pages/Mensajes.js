@@ -26,27 +26,33 @@ export default function Mensajes() {
   }, [token]);
 
   const loadMessages = async () => {
-    // Simulated messages - in production, fetch from backend
-    const mockMessages = [
-      {
-        id: '1',
-        type: 'booking_confirmed',
-        title: 'Reserva confirmada',
-        message: 'Tu reserva para el 15 de Noviembre ha sido confirmada con Sonia Sánchez.',
-        date: new Date(),
-        read: false,
-      },
-      {
-        id: '2',
+    try {
+      const response = await axios.get(`${API}/messages`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      // Transform backend messages to frontend format
+      const transformedMessages = response.data.map(msg => ({
+        id: msg.id,
         type: 'message',
-        title: 'Nuevo mensaje de Sonia',
-        message: '¡Hola! Confirmo que estaré allí a las 10:00. ¿Hay algo especial que deba saber sobre tu perro?',
-        date: new Date(Date.now() - 86400000),
-        read: true,
-      },
-    ];
-    setMessages(mockMessages);
-    setLoading(false);
+        title: msg.sender_id === user.id 
+          ? `Mensaje a ${msg.recipient_name}` 
+          : `Mensaje de ${msg.sender_name}`,
+        message: msg.message,
+        date: new Date(msg.created_at),
+        read: msg.read || msg.sender_id === user.id,
+        sender_name: msg.sender_name,
+        recipient_name: msg.recipient_name,
+        sender_picture: msg.sender_picture,
+        isFromMe: msg.sender_id === user.id,
+      }));
+      
+      setMessages(transformedMessages);
+    } catch (err) {
+      console.error('Error loading messages:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getIcon = (type) => {
