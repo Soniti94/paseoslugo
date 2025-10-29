@@ -534,8 +534,48 @@ async def cancel_booking(booking_id: str, authorization: Optional[str] = Header(
     if booking['owner_id'] != user.id:
         raise HTTPException(403, "Not authorized")
     
-    await db.bookings.update_one({"id": booking_id}, {"$set": {"status": "cancelled"}})
-    return {"message": "Booking cancelled"}
+    # Parse booking date and time
+    from datetime import datetime, timezone, timedelta
+    booking_datetime_str = f"{booking['date']} {booking['time']}"
+    booking_datetime = datetime.strptime(booking_datetime_str, "%Y-%m-%d %H:%M")
+    booking_datetime = booking_datetime.replace(tzinfo=timezone.utc)
+    
+    now = datetime.now(timezone.utc)
+    time_until_booking = booking_datetime - now
+    hours_until_booking = time_until_booking.total_seconds() / 3600
+    
+    # Determine refund amount based on cancellation policy
+    amount = float(booking['amount'])
+    refund_amount = 0.0
+    management_fee = 3.0
+    refund_description = ""
+    
+    if hours_until_booking > 2:
+        # More than 2 hours before: refund minus management fee
+        refund_amount = max(0, amount - management_fee)
+        refund_description = f"Reembolso de {refund_amount}€ (total {amount}€ - {management_fee}€ gastos de gestión)"
+    else:
+        # Less than 2 hours before: no refund, full charge
+        refund_amount = 0.0
+        refund_description = f"Sin reembolso. Cancelación con menos de 2 horas de antelación. Se cobra el importe completo ({amount}€)."
+    
+    # Update booking status
+    await db.bookings.update_one(
+        {"id": booking_id},
+        {"$set": {
+            "status": "cancelled",
+            "cancelled_at": datetime.now(timezone.utc).isoformat(),
+            "refund_amount": refund_amount,
+            "refund_description": refund_description,
+        }}
+    )
+    
+    return {
+        "message": "Booking cancelled",
+        "refund_amount": refund_amount,
+        "refund_description": refund_description,
+        "hours_until_booking": hours_until_booking,
+    }
 
 # ============ WALKS ROUTES ============
 
