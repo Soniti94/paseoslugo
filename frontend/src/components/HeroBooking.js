@@ -78,7 +78,7 @@ export default function HeroBooking() {
                   ...(petType === 'dog' ? styles.typeButtonActive : {}),
                 }}
                 onClick={() => setPetType('dog')}
-                data-testid=\"pet-type-dog\"
+                data-testid="pet-type-dog"
               >
                 <DogIcon size={24} />
                 <span>{t('hero.dog')}</span>
@@ -89,7 +89,7 @@ export default function HeroBooking() {
                   ...(petType === 'cat' ? styles.typeButtonActive : {}),
                 }}
                 onClick={() => setPetType('cat')}
-                data-testid=\"pet-type-cat\"
+                data-testid="pet-type-cat"
               >
                 <Cat size={24} />
                 <span>{t('hero.cat')}</span>
