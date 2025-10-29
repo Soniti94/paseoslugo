@@ -1,5 +1,30 @@
 /* Responsive Utilities */
 
+/* Navbar Responsive */
+@media (max-width: 768px) {
+  nav .desktopMenu {
+    display: none !important;
+  }
+
+  nav .desktopButtons {
+    display: none !important;
+  }
+
+  nav .userMenuDesktop {
+    display: none !important;
+  }
+
+  nav button[data-testid="mobile-menu-btn"] {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  nav button[data-testid="mobile-menu-btn"] {
+    display: none !important;
+  }
+}
+
 /* Tablet and below */
 @media (max-width: 1024px) {
   /* Landing Page */
