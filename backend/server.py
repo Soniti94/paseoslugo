@@ -282,6 +282,33 @@ async def get_me(authorization: Optional[str] = Header(None)):
         raise HTTPException(401, "Not authenticated")
     return user.model_dump()
 
+class UpdateProfileInput(BaseModel):
+    name: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
+
+@api_router.patch("/auth/me")
+async def update_profile(input: UpdateProfileInput, authorization: Optional[str] = Header(None)):
+    user = await get_current_user(authorization=authorization)
+    if not user:
+        raise HTTPException(401, "Not authenticated")
+    
+    # Prepare update data
+    update_data = {}
+    if input.name is not None:
+        update_data['name'] = input.name
+    if input.phone is not None:
+        update_data['phone'] = input.phone
+    if input.address is not None:
+        update_data['address'] = input.address
+    
+    if update_data:
+        await db.users.update_one({"id": user.id}, {"$set": update_data})
+    
+    # Return updated user
+    user_doc = await db.users.find_one({"id": user.id}, {"_id": 0})
+    return User(**user_doc).model_dump()
+
 @api_router.post("/auth/session")
 async def create_session_from_emergent(session_id: str = Header(None, alias="X-Session-ID"), response: Response = None):
     """Exchange Emergent session_id for user data and create session"""
