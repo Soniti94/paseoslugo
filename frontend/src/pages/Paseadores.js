@@ -155,7 +155,7 @@ export default function Paseadores() {
                     <span style={styles.priceLabel}>Precio</span>
                     <span style={styles.priceAmount}>Desde {walker.price_from}€</span>
                   </div>
-                  <div style={styles.cardActions}>
+                  <div style={styles.cardActions} className="paseadores-card-actions">
                     <Button
                       variant="outline"
                       onClick={() => navigate(`/paseador/${walker.id}`)}
