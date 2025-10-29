@@ -29,11 +29,11 @@ print('User ID: ' + userId);
 
 ```bash
 # Test auth endpoint
-curl -X GET "https://lugo-tailwags.preview.emergentagent.com/api/auth/me" \
+curl -X GET "https://dogwalk-app.preview.emergentagent.com/api/auth/me" \
   -H "Authorization: Bearer YOUR_SESSION_TOKEN"
 
 # Test protected endpoints
-curl -X GET "https://lugo-tailwags.preview.emergentagent.com/api/bookings" \
+curl -X GET "https://dogwalk-app.preview.emergentagent.com/api/bookings" \
   -H "Authorization: Bearer YOUR_SESSION_TOKEN"
 ```
 
@@ -50,5 +50,5 @@ await page.context.add_cookies([{
     "secure": true,
     "sameSite": "None"
 }]);
-await page.goto("https://lugo-tailwags.preview.emergentagent.com");
+await page.goto("https://dogwalk-app.preview.emergentagent.com");
 ```
