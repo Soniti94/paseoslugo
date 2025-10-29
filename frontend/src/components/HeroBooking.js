@@ -9,7 +9,7 @@ export default function HeroBooking() {
 
   return (
     <section style={styles.hero}>
-      <div style={styles.heroContent}>
+      <div style={styles.heroContent} className="hero-booking-content">
         <div style={styles.textSection}>
           <h1 style={styles.title}>
             {t('hero.title')} <span style={styles.highlight}>{t('hero.subtitle')}</span>
