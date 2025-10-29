@@ -59,7 +59,7 @@ export default function Footer() {
       {/* Main Footer */}
       <div style={styles.mainFooter}>
         <div className="container">
-          <div style={styles.footerGrid}>
+          <div style={styles.footerGrid} className="footer-grid">
             {/* Brand Column */}
             <div style={styles.footerColumn}>
               <div style={styles.brand}>
