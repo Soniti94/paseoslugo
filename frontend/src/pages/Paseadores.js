@@ -153,7 +153,7 @@ export default function Paseadores() {
                 <div style={styles.cardFooter}>
                   <div style={styles.price}>
                     <span style={styles.priceLabel}>Precio</span>
-                    <span style={styles.priceAmount}>Desde {walker.price_from}€</span>
+                    <span style={styles.priceAmount}>Desde {walker.price_from || walker.price_per_hour}€</span>
                   </div>
                   <div style={styles.cardActions} className="paseadores-card-actions">
                     <Button
