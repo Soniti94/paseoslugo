@@ -70,7 +70,7 @@ export default function Navbar() {
           <div style={styles.desktopMenu} className="desktop-only">
             <Link to="/paseadores" style={styles.navLink} data-testid="nav-paseadores">{t('nav.walkers')}</Link>
             <Link to="/" style={styles.navLink}>{t('nav.howItWorks')}</Link>
-            <Link to="/" style={styles.navLink}>{t('nav.contact')}</Link>
+            <Link to="/contacto" style={styles.navLink}>{t('nav.contact')}</Link>
           </div>
 
           {/* Desktop User Menu */}
