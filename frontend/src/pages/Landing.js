@@ -69,7 +69,7 @@ export default function Landing() {
             tu mascota estará disfrutando de un paseo profesional.
           </p>
 
-          <div style={styles.stepsGrid}>
+          <div style={styles.stepsGrid} className="landing-steps-grid">
             <div style={styles.stepCard} data-testid="step-1">
               <div style={styles.stepNumber}>1</div>
               <div style={styles.stepIcon}>
