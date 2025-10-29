@@ -107,39 +107,48 @@ user_problem_statement: "Implement client profile management, message/notificati
 backend:
   - task: "User profile update endpoint (PATCH /api/auth/me)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created PATCH /api/auth/me endpoint to update user name, phone, and address. Added phone and address fields to User model."
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE TESTING PASSED: (1) Successfully updates name, phone, address fields (2) Partial updates work correctly (3) Requires authentication (4) Data persists in database (5) Returns updated user data. Fixed datetime comparison bug in get_current_user function."
 
   - task: "Messages API endpoints"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created Message model and endpoints: GET /api/messages, POST /api/messages, PATCH /api/messages/{id}/read, GET /api/messages/unread-count"
+      - working: true
+        agent: "testing"
+        comment: "✅ ALL ENDPOINTS WORKING: (1) GET /api/messages returns messages with enriched user data (sender_name, recipient_name) (2) POST /api/messages creates messages successfully (3) PATCH /api/messages/{id}/read marks as read (4) GET /api/messages/unread-count returns correct count (5) All endpoints require authentication."
 
   - task: "Booking cancellation with refund logic"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Endpoint already exists at PATCH /api/bookings/{id}/cancel. Implements cancellation policy: full refund minus 3€ fee if >2hrs before, no refund if <2hrs before."
+      - working: true
+        agent: "testing"
+        comment: "✅ CANCELLATION LOGIC VERIFIED: (1) Correctly calculates refund (22€ - 3€ = 19€ for >2hrs cancellation) (2) Returns refund_amount and refund_description (3) Handles non-existent bookings (404) (4) Requires authentication (5) Updates booking status to cancelled."
 
 frontend:
   - task: "Client profile edit and save"
