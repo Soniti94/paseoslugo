@@ -10,16 +10,16 @@ export default function Landing() {
     <div style={styles.landing}>
       {/* Hero Section */}
       <section style={styles.hero} data-testid="hero-section">
-        <div className="container" style={styles.heroContent}>
+        <div className="container" style={styles.heroContent} className="landing-hero-grid">
           <div style={styles.heroText}>
-            <h1 style={styles.heroTitle} data-testid="hero-title">
+            <h1 style={styles.heroTitle} className="landing-hero-title" data-testid="hero-title">
               Paseos seguros y confiables para tu mejor amigo en <span style={styles.highlight}>Lugo</span>
             </h1>
-            <p style={styles.heroSubtitle} data-testid="hero-subtitle">
+            <p style={styles.heroSubtitle} className="landing-hero-subtitle" data-testid="hero-subtitle">
               Conectamos a dueños de mascotas con paseadores verificados y experimentados. 
               Tu perro recibirá el ejercicio y la atención que merece mientras tú te ocupas de tus actividades.
             </p>
-            <div style={styles.heroButtons}>
+            <div style={styles.heroButtons} className="landing-hero-buttons">
               <Button
                 onClick={() => navigate('/paseadores')}
                 style={styles.ctaButton}
@@ -28,7 +28,7 @@ export default function Landing() {
                 Encuentra un paseador
               </Button>
             </div>
-            <div style={styles.trustSignals}>
+            <div style={styles.trustSignals} className="landing-trust-signals">
               <div style={styles.trustItem}>
                 <Award size={20} color="#FF6B00" />
                 <span>Paseadores verificados</span>
@@ -43,7 +43,7 @@ export default function Landing() {
               </div>
             </div>
           </div>
-          <div style={styles.heroImage}>
+          <div style={styles.heroImage} className="landing-hero-image">
             <img
               src="https://images.unsplash.com/photo-1568572933382-74d440642117?w=600&q=80"
               alt="Person walking dog"
