@@ -124,7 +124,7 @@ export default function Landing() {
       {/* Features */}
       <section style={styles.features}>
         <div className="container">
-          <div style={styles.featuresGrid}>
+          <div style={styles.featuresGrid} className="landing-features-grid">
             <div style={styles.featureCard}>
               <div style={styles.featureIcon}>
                 <Clock size={32} color="#FF6B00" />
