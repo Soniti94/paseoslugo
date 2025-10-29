@@ -181,6 +181,11 @@ class CreateCheckoutInput(BaseModel):
     booking_id: str
     origin_url: str
 
+class CreateMessageInput(BaseModel):
+    recipient_id: str
+    message: str
+    booking_id: Optional[str] = None
+
 # ============ HELPER FUNCTIONS ============
 
 async def get_current_user(authorization: Optional[str] = Header(None), cookie_session: Optional[str] = None) -> Optional[User]:
