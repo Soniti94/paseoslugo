@@ -323,7 +323,7 @@ const styles = {
     display: 'inline-block',
   },
   mobileMenuBtn: {
-    display: 'none',
+    display: 'block',
     background: 'none',
     border: 'none',
     cursor: 'pointer',
