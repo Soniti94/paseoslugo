@@ -92,7 +92,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div style={styles.desktopMenu} className="desktop-only">
             <Link to="/paseadores" style={styles.navLink} data-testid="nav-paseadores">{t('nav.walkers')}</Link>
-            <Link to="/" style={styles.navLink}>{t('nav.howItWorks')}</Link>
+            <a href="#como-funciona" onClick={handleHowItWorksClick} style={styles.navLink}>{t('nav.howItWorks')}</a>
             <Link to="/contacto" style={styles.navLink}>{t('nav.contact')}</Link>
           </div>
 
