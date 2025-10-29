@@ -77,6 +77,16 @@ export const translations = {
       terms: 'Términos de servicio',
       cookies: 'Política de cookies',
     },
+    contact: {
+      subtitle: '¿Tienes alguna pregunta? Estamos aquí para ayudarte',
+      formTitle: 'Envíanos un mensaje',
+      name: 'Nombre',
+      email: 'Email',
+      subject: 'Asunto',
+      message: 'Mensaje',
+      send: 'Enviar mensaje',
+      success: '¡Mensaje enviado! Te responderemos pronto.',
+    },
   },
   gl: {
     common: {
