@@ -662,7 +662,7 @@ async def create_checkout_session(input: CreateCheckoutInput, authorization: Opt
     amount = float(booking['amount'])
     
     # Create Stripe checkout
-    host_url = input.origin_url
+    host_url = BACKEND_URL
     webhook_url = f"{host_url}/api/webhook/stripe"
     stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
     
