@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from '@/components/ui/button';
 import HeroBooking from '@/components/HeroBooking';
 import { Search, Calendar, MapPin, Camera, Award, Heart, Clock, Shield } from 'lucide-react';
 
