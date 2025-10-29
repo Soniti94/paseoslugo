@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
+  const [skipValidation, setSkipValidation] = useState(false);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -34,7 +35,14 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      if (token) {
+      // Skip validation if we just logged in (user data already set)
+      if (skipValidation && user) {
+        setSkipValidation(false);
+        setLoading(false);
+        return;
+      }
+
+      if (token && !user) {
         try {
           const response = await axios.get(`${API}/auth/me`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -44,13 +52,14 @@ export const AuthProvider = ({ children }) => {
           console.error('Token invalid:', err);
           localStorage.removeItem('token');
           setToken(null);
+          setUser(null);
         }
       }
       setLoading(false);
     };
 
     checkSession();
-  }, [token]);
+  }, [token, skipValidation]);
 
   const login = async (email, password) => {
     const response = await axios.post(`${API}/auth/login`, { email, password });
