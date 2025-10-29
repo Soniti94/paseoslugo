@@ -14,7 +14,7 @@ export default function Landing() {
       <HeroBooking />
 
       {/* How it Works */}
-      <section style={styles.howItWorks} data-testid="how-it-works-section">
+      <section id="como-funciona" style={styles.howItWorks} data-testid="how-it-works-section">
         <div className="container">
           <h2 style={styles.sectionTitle}>Cómo funciona</h2>
           <p style={styles.sectionSubtitle}>
