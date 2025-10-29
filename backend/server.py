@@ -719,6 +719,74 @@ async def add_walk_photo(booking_id: str, photo_base64: str, authorization: Opti
     
     return {"message": "Photo added"}
 
+# ============ MESSAGES ROUTES ============
+
+@api_router.get("/messages")
+async def get_messages(authorization: Optional[str] = Header(None)):
+    user = await get_current_user(authorization=authorization)
+    if not user:
+        raise HTTPException(401, "Not authenticated")
+    
+    # Get messages where user is sender or recipient
+    messages = await db.messages.find({
+        "$or": [
+            {"sender_id": user.id},
+            {"recipient_id": user.id}
+        ]
+    }, {"_id": 0}).sort("created_at", -1).to_list(100)
+    
+    # Enrich with user data
+    for msg in messages:
+        sender_doc = await db.users.find_one({"id": msg['sender_id']}, {"_id": 0})
+        recipient_doc = await db.users.find_one({"id": msg['recipient_id']}, {"_id": 0})
+        msg['sender_name'] = sender_doc['name'] if sender_doc else "Unknown"
+        msg['recipient_name'] = recipient_doc['name'] if recipient_doc else "Unknown"
+        msg['sender_picture'] = sender_doc.get('picture')
+        msg['recipient_picture'] = recipient_doc.get('picture')
+    
+    return messages
+
+@api_router.post("/messages")
+async def send_message(input: CreateMessageInput, authorization: Optional[str] = Header(None)):
+    user = await get_current_user(authorization=authorization)
+    if not user:
+        raise HTTPException(401, "Not authenticated")
+    
+    message = Message(
+        sender_id=user.id,
+        recipient_id=input.recipient_id,
+        message=input.message,
+        booking_id=input.booking_id
+    )
+    
+    doc = message.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.messages.insert_one(doc)
+    
+    return message.model_dump()
+
+@api_router.patch("/messages/{message_id}/read")
+async def mark_message_read(message_id: str, authorization: Optional[str] = Header(None)):
+    user = await get_current_user(authorization=authorization)
+    if not user:
+        raise HTTPException(401, "Not authenticated")
+    
+    await db.messages.update_one(
+        {"id": message_id, "recipient_id": user.id},
+        {"$set": {"read": True}}
+    )
+    
+    return {"message": "Marked as read"}
+
+@api_router.get("/messages/unread-count")
+async def get_unread_count(authorization: Optional[str] = Header(None)):
+    user = await get_current_user(authorization=authorization)
+    if not user:
+        raise HTTPException(401, "Not authenticated")
+    
+    count = await db.messages.count_documents({"recipient_id": user.id, "read": False})
+    return {"count": count}
+
 # ============ PAYMENTS ROUTES ============
 
 PACKAGES = {
