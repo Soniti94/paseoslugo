@@ -312,16 +312,10 @@ const styles = {
   },
   '@media (max-width: 768px)': {
     desktopMenu: {
-      display: 'none',
-    },
-    reservarBtn: {
-      display: 'none',
+      display: 'none !important',
     },
     mobileMenuBtn: {
-      display: 'block',
-    },
-    mobileMenuContent: {
-      display: 'flex',
+      display: 'block !important',
     },
   },
 };
