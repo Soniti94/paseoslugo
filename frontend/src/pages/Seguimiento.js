@@ -73,7 +73,7 @@ export default function Seguimiento() {
       <div className="container">
         <h1 style={styles.title} data-testid="seguimiento-title">Seguimiento del Paseo</h1>
 
-        <div style={styles.grid}>
+        <div style={styles.grid} className="seguimiento-grid">
           {/* Left: Map */}
           <div style={styles.mapSection}>
             <GoogleMap
