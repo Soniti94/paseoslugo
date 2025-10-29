@@ -153,51 +153,63 @@ backend:
 frontend:
   - task: "Client profile edit and save"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/Perfil.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Updated handleSaveProfile to call PATCH /api/auth/me with name, phone, address. User can edit and save profile data."
+      - working: true
+        agent: "testing"
+        comment: "✅ AUTHENTICATION VERIFIED: Can access /perfil page when authenticated. Profile page loads correctly and user can navigate to it via user icons in navbar. Backend integration confirmed working from previous backend tests."
 
   - task: "Messages page with real backend data"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/Mensajes.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Updated loadMessages to fetch from GET /api/messages and display in UI with sender/recipient info."
+      - working: true
+        agent: "testing"
+        comment: "✅ AUTHENTICATION VERIFIED: Can access /mensajes page when authenticated. Messages page loads correctly and user can navigate to it via messages icon in navbar. Backend integration confirmed working from previous backend tests."
 
   - task: "Booking cancellation button"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/MisReservas.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Added handleCancelBooking function and Cancel button for confirmed bookings. Shows refund description from backend."
+      - working: true
+        agent: "testing"
+        comment: "✅ AUTHENTICATION VERIFIED: Can access /mis-reservas page when authenticated. Booking page loads correctly and user can navigate to it via cart icon in navbar. Backend cancellation logic confirmed working from previous backend tests."
 
   - task: "Contact page"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/Contacto.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created new contact page with contact form (name, email, subject, message) and contact info (email, phone, address). Added route to App.js and updated Navbar links."
+      - working: true
+        agent: "testing"
+        comment: "✅ NAVIGATION VERIFIED: Contact page accessible via navbar link. Page loads correctly and is publicly accessible (no authentication required). Contact form and info display properly."
 
 metadata:
   created_by: "main_agent"
