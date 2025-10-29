@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import HeroBooking from '@/components/HeroBooking';
-import Button from '@/components/Button';
 import { Search, Calendar, MapPin, Camera, Award, Heart, Clock, Shield } from 'lucide-react';
 
 export default function Landing() {
