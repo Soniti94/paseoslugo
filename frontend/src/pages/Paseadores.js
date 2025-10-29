@@ -76,7 +76,7 @@ export default function Paseadores() {
           </p>
         </div>
 
-        <div style={styles.filters}>
+        <div style={styles.filters} className="paseadores-filters">
           <Input
             placeholder="Buscar por nombre o especialidad..."
             value={searchTerm}
