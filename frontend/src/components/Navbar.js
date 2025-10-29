@@ -160,9 +160,9 @@ export default function Navbar() {
             <Link to="/paseadores" style={styles.mobileLink} onClick={() => handleNavClick('/paseadores')}>
               {t('nav.walkers')}
             </Link>
-            <Link to="/" style={styles.mobileLink} onClick={() => handleNavClick('/')}>
+            <a href="#como-funciona" style={styles.mobileLink} onClick={handleHowItWorksClick}>
               {t('nav.howItWorks')}
-            </Link>
+            </a>
             <Link to="/contacto" style={styles.mobileLink} onClick={() => handleNavClick('/contacto')}>
               {t('nav.contact')}
             </Link>
