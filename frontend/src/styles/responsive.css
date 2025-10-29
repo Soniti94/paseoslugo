@@ -8,11 +8,7 @@
 }
 
 @media (min-width: 769px) {
-  nav button[data-testid="mobile-menu-btn"] {
-    display: none !important;
-  }
-  
-  nav > div + div[data-testid="mobile-menu"] {
+  button[data-testid="mobile-menu-btn"] {
     display: none !important;
   }
 }
