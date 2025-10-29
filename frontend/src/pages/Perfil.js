@@ -73,8 +73,21 @@ export default function Perfil() {
   };
 
   const handleSaveProfile = async () => {
-    toast.success(t('profile.saved') || 'Perfil actualizado');
-    setEditing(false);
+    try {
+      await axios.patch(
+        `${API}/auth/me`,
+        {
+          name,
+          phone,
+          address,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      toast.success(t('profile.saved') || 'Perfil actualizado');
+      setEditing(false);
+    } catch (err) {
+      toast.error('Error al actualizar perfil');
+    }
   };
 
   const handleAddPet = async (e) => {
