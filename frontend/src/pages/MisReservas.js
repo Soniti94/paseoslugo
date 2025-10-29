@@ -162,7 +162,7 @@ export default function MisReservas() {
         {/* Dogs Section */}
         <div style={styles.section}>
           <h2 style={styles.sectionTitle}>Mis perros</h2>
-          <div style={styles.dogsGrid}>
+          <div style={styles.dogsGrid} className="dogs-grid">
             {dogs.map((dog) => (
               <div key={dog.id} style={styles.dogCard} data-testid={`dog-card-${dog.id}`}>
                 <div style={styles.dogAvatar}>{dog.name.charAt(0)}</div>
