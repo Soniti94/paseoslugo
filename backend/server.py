@@ -666,8 +666,8 @@ async def create_checkout_session(input: CreateCheckoutInput, authorization: Opt
     webhook_url = f"{host_url}/api/webhook/stripe"
     stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
     
-    success_url = f"{host_url}/pago-exitoso?session_id={{{{CHECKOUT_SESSION_ID}}}}"
-    cancel_url = f"{host_url}/reservar/{booking['walker_id']}"
+    success_url = f"{input.origin_url}/pago-exitoso?session_id={{{{CHECKOUT_SESSION_ID}}}}"
+    cancel_url = f"{input.origin_url}/reservar/{booking['walker_id']}"
     
     checkout_request = CheckoutSessionRequest(
         amount=amount,
