@@ -1,0 +1,189 @@
+/* Responsive Utilities */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  /* Landing Page */
+  .landing-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .landing-hero-image {
+    order: -1;
+  }
+
+  .landing-steps-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .landing-features-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .landing-trust-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Paseadores */
+  .paseadores-filters {
+    grid-template-columns: 1fr !important;
+  }
+
+  .paseadores-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Perfil Paseador */
+  .perfil-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .perfil-left {
+    position: static !important;
+  }
+
+  .perfil-services-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reservar */
+  .reservar-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .reservar-summary {
+    position: static !important;
+  }
+
+  .reservar-service-options {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .footer-benefits-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  /* General */
+  .container {
+    padding: 0 1rem !important;
+  }
+
+  /* Landing Page */
+  .landing-hero-title {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .landing-hero-subtitle {
+    font-size: 1rem !important;
+  }
+
+  .landing-hero-buttons {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .landing-hero-buttons button {
+    width: 100%;
+  }
+
+  .landing-trust-signals {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .landing-steps-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .landing-features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .landing-trust-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .landing-stats-bar {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  /* Paseadores */
+  .paseadores-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .paseadores-card-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Perfil Paseador */
+  .perfil-services-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .perfil-specialty-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Reservar */
+  .reservar-service-options {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mis Reservas */
+  .dogs-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Seguimiento */
+  .seguimiento-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .seguimiento-map {
+    height: 300px !important;
+  }
+
+  .seguimiento-photos-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer-newsletter-form {
+    flex-direction: column !important;
+  }
+
+  .footer-newsletter-form input,
+  .footer-newsletter-form button {
+    width: 100% !important;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .landing-hero-title {
+    font-size: 1.75rem !important;
+  }
+
+  .landing-section-title {
+    font-size: 1.75rem !important;
+  }
+
+  .perfil-specialty-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
