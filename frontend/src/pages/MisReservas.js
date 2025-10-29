@@ -75,6 +75,25 @@ export default function MisReservas() {
     }
   };
 
+  const handleCancelBooking = async (bookingId) => {
+    if (!window.confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
+      return;
+    }
+
+    try {
+      const response = await axios.patch(
+        `${API}/bookings/${bookingId}/cancel`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      toast.success(response.data.refund_description);
+      loadData();
+    } catch (err) {
+      toast.error('Error al cancelar reserva');
+    }
+  };
+
   const getStatusBadge = (status) => {
     const badges = {
       pending_payment: { text: 'Pendiente pago', color: '#F59E0B' },
