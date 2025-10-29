@@ -291,7 +291,7 @@ async def create_session_from_emergent(session_id: str = Header(None, alias="X-S
     # Call Emergent API
     try:
         resp = requests.get(
-            "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
+            EMERGENT_AUTH_URL,
             headers={"X-Session-ID": session_id}
         )
         resp.raise_for_status()
