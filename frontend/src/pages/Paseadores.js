@@ -97,7 +97,7 @@ export default function Paseadores() {
           </Select>
         </div>
 
-        <div style={styles.walkersGrid}>
+        <div style={styles.walkersGrid} className="paseadores-grid">
           {filteredWalkers.map((walker) => (
             <div key={walker.id} style={styles.walkerCard} data-testid={`walker-card-${walker.id}`}>
               <div style={styles.cardHeader}>
