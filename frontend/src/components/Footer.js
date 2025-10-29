@@ -133,7 +133,7 @@ export default function Footer() {
 
               <div style={styles.newsletter}>
                 <h6 style={styles.newsletterHeading}>Newsletter</h6>
-                <form onSubmit={handleNewsletterSubmit} style={styles.newsletterForm}>
+                <form onSubmit={handleNewsletterSubmit} style={styles.newsletterForm} className="footer-newsletter-form">
                   <Input
                     type="email"
                     placeholder="Tu email"
