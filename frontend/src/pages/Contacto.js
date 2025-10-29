@@ -48,8 +48,8 @@ export default function Contacto() {
                 <Mail size={24} color="#FF6B00" />
               </div>
               <h3 style={styles.infoTitle}>Email</h3>
-              <a href="mailto:info@paseos-lugo.es" style={styles.infoLink}>
-                info@paseos-lugo.es
+              <a href="mailto:info@paseoslugo.com" style={styles.infoLink}>
+                info@paseoslugo.com
               </a>
             </Card>
 
@@ -58,8 +58,8 @@ export default function Contacto() {
                 <Phone size={24} color="#FF6B00" />
               </div>
               <h3 style={styles.infoTitle}>Teléfono</h3>
-              <a href="tel:+34612345678" style={styles.infoLink}>
-                +34 612 345 678
+              <a href="tel:+34642123169" style={styles.infoLink}>
+                +34 642 123 169
               </a>
             </Card>
 
