@@ -64,7 +64,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div style={styles.desktopMenu}>
+          <div style={styles.desktopMenu} className="desktop-only">
             <Link to="/paseadores" style={styles.navLink} data-testid="nav-paseadores">Paseadores</Link>
             <Link to="/" style={styles.navLink}>Cómo funciona</Link>
             <Link to="/" style={styles.navLink}>Contacto</Link>
@@ -74,7 +74,7 @@ export default function Navbar() {
           <div style={styles.navRight}>
             {user ? (
               <>
-                <div style={styles.userMenuDesktop}>
+                <div style={styles.userMenuDesktop} className="desktop-only">
                   <span style={styles.userName} data-testid="user-name">{user.name}</span>
                   <Button variant="outline" size="sm" onClick={() => navigate('/mis-reservas')} data-testid="nav-mis-reservas">
                     Mis Reservas
@@ -85,7 +85,7 @@ export default function Navbar() {
                 </div>
               </>
             ) : (
-              <div style={styles.desktopButtons}>
+              <div style={styles.desktopButtons} className="desktop-only">
                 <Button onClick={() => setShowAuth(true)} style={styles.loginBtn} data-testid="nav-login-btn">
                   Iniciar sesión
                 </Button>
