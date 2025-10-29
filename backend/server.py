@@ -206,7 +206,10 @@ async def get_current_user(authorization: Optional[str] = Header(None), cookie_s
     session = await db.user_sessions.find_one({"session_token": token})
     if session:
         # Check expiration
-        if session['expires_at'] < datetime.now(timezone.utc):
+        expires_at = session['expires_at']
+        if isinstance(expires_at, str):
+            expires_at = datetime.fromisoformat(expires_at.replace('Z', '+00:00'))
+        if expires_at < datetime.now(timezone.utc):
             return None
         # Get user
         user_doc = await db.users.find_one({"id": session['user_id']}, {"_id": 0})
