@@ -105,7 +105,7 @@ export default function PaseadorPerfil() {
 
             <div style={styles.section}>
               <h2 style={styles.sectionTitle}>Especialidades</h2>
-              <div style={styles.specialtyGrid}>
+              <div style={styles.specialtyGrid} className="perfil-specialty-grid">
                 {walker.specialties.map((specialty, idx) => (
                   <div key={idx} style={styles.specialtyCard}>
                     {specialty}
