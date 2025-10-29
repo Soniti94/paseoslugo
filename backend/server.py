@@ -46,6 +46,8 @@ class User(BaseModel):
     picture: Optional[str] = None
     role: str = "owner"  # owner or walker
     password_hash: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class UserSession(BaseModel):
