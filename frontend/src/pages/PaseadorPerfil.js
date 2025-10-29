@@ -116,7 +116,7 @@ export default function PaseadorPerfil() {
 
             <div style={styles.section}>
               <h2 style={styles.sectionTitle}>Servicios disponibles</h2>
-              <div style={styles.servicesGrid}>
+              <div style={styles.servicesGrid} className="perfil-services-grid">
                 <div style={styles.serviceCard}>
                   <h4 style={styles.serviceTitle}>Paseo Básico</h4>
                   <p style={styles.servicePrice}>15€</p>
