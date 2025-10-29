@@ -101,3 +101,110 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Implement client profile management, message/notification system, cart functionality with cancellation, and contact page for the Lugo dog walking app."
+
+backend:
+  - task: "User profile update endpoint (PATCH /api/auth/me)"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created PATCH /api/auth/me endpoint to update user name, phone, and address. Added phone and address fields to User model."
+
+  - task: "Messages API endpoints"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created Message model and endpoints: GET /api/messages, POST /api/messages, PATCH /api/messages/{id}/read, GET /api/messages/unread-count"
+
+  - task: "Booking cancellation with refund logic"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint already exists at PATCH /api/bookings/{id}/cancel. Implements cancellation policy: full refund minus 3€ fee if >2hrs before, no refund if <2hrs before."
+
+frontend:
+  - task: "Client profile edit and save"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Perfil.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Updated handleSaveProfile to call PATCH /api/auth/me with name, phone, address. User can edit and save profile data."
+
+  - task: "Messages page with real backend data"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Mensajes.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Updated loadMessages to fetch from GET /api/messages and display in UI with sender/recipient info."
+
+  - task: "Booking cancellation button"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/MisReservas.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added handleCancelBooking function and Cancel button for confirmed bookings. Shows refund description from backend."
+
+  - task: "Contact page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Contacto.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created new contact page with contact form (name, email, subject, message) and contact info (email, phone, address). Added route to App.js and updated Navbar links."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "User profile update endpoint (PATCH /api/auth/me)"
+    - "Messages API endpoints"
+    - "Booking cancellation with refund logic"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Implemented 4 main features: (1) Client profile management with phone/address fields and backend endpoint, (2) Message system with full CRUD endpoints, (3) Booking cancellation button in frontend with existing backend logic, (4) New contact page. Backend needs testing for profile update and messages endpoints. Frontend hot reload should handle changes automatically."
