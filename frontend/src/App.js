@@ -40,6 +40,7 @@ function App() {
               <Route path="/en-paseo/:bookingId" element={<EnPaseo />} />
               <Route path="/perfil" element={<Perfil />} />
               <Route path="/mensajes" element={<Mensajes />} />
+              <Route path="/contacto" element={<Contacto />} />
               <Route path="/privacidad" element={<PrivacyPolicy />} />
               <Route path="/terminos" element={<TermsOfService />} />
               <Route path="/cookies" element={<CookiePolicy />} />
