@@ -140,7 +140,7 @@ export default function Navbar() {
             <Link to="/" style={styles.mobileLink} onClick={() => handleNavClick('/')}>
               {t('nav.howItWorks')}
             </Link>
-            <Link to="/" style={styles.mobileLink} onClick={() => handleNavClick('/')}>
+            <Link to="/contacto" style={styles.mobileLink} onClick={() => handleNavClick('/contacto')}>
               {t('nav.contact')}
             </Link>
             
