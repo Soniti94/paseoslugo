@@ -195,7 +195,7 @@ export default function Landing() {
             </div>
           </div>
 
-          <div style={styles.statsBar}>
+          <div style={styles.statsBar} className="landing-stats-bar">
             <div style={styles.stat}>
               <div style={styles.statNumber}>500+</div>
               <div style={styles.statLabel}>Perros felices</div>
