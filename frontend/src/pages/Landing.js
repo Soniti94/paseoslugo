@@ -161,7 +161,7 @@ export default function Landing() {
             demostrable en el cuidado de mascotas. Encuentra el perfecto para tu perro.
           </p>
 
-          <div style={styles.trustGrid}>
+          <div style={styles.trustGrid} className="landing-trust-grid">
             <div style={styles.trustCard}>
               <div style={styles.trustIconCircle}>
                 <Award size={32} color="#3B82F6" />
