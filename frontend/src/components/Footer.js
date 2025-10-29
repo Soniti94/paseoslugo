@@ -19,7 +19,7 @@ export default function Footer() {
       {/* Benefits Section */}
       <div style={styles.benefitsSection}>
         <div className="container">
-          <div style={styles.benefitsGrid}>
+          <div style={styles.benefitsGrid} className="footer-benefits-grid">
             <div style={styles.benefitCard}>
               <div style={{...styles.benefitIcon, background: '#E0F2FE'}}>
                 <Shield size={32} color="#3B82F6" />
