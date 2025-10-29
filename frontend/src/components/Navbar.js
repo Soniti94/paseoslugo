@@ -45,7 +45,13 @@ export default function Navbar() {
   const handleLogout = async () => {
     await logout();
     navigate('/');
+    setShowMobileMenu(false);
     toast.success('Sesión cerrada');
+  };
+
+  const handleNavClick = (path) => {
+    navigate(path);
+    setShowMobileMenu(false);
   };
 
   return (
@@ -64,26 +70,29 @@ export default function Navbar() {
             <Link to="/" style={styles.navLink}>Contacto</Link>
           </div>
 
+          {/* Desktop User Menu */}
           <div style={styles.navRight}>
             {user ? (
-              <div style={styles.userMenu}>
-                <span style={styles.userName} data-testid="user-name">{user.name}</span>
-                <Button variant="outline" size="sm" onClick={() => navigate('/mis-reservas')} data-testid="nav-mis-reservas">
-                  Mis Reservas
-                </Button>
-                <Button variant="ghost" size="icon" onClick={handleLogout} data-testid="nav-logout">
-                  <LogOut size={18} />
-                </Button>
-              </div>
-            ) : (
               <>
+                <div style={styles.userMenuDesktop}>
+                  <span style={styles.userName} data-testid="user-name">{user.name}</span>
+                  <Button variant="outline" size="sm" onClick={() => navigate('/mis-reservas')} data-testid="nav-mis-reservas">
+                    Mis Reservas
+                  </Button>
+                  <Button variant="ghost" size="icon" onClick={handleLogout} data-testid="nav-logout">
+                    <LogOut size={18} />
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <div style={styles.desktopButtons}>
                 <Button onClick={() => setShowAuth(true)} style={styles.loginBtn} data-testid="nav-login-btn">
                   Iniciar sesión
                 </Button>
                 <Button onClick={() => navigate('/paseadores')} className="btn-primary" style={styles.reservarBtn} data-testid="nav-reservar-btn">
                   Reservar paseo
                 </Button>
-              </>
+              </div>
             )}
 
             {/* Mobile menu button */}
@@ -96,11 +105,50 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {showMobileMenu && (
           <div style={styles.mobileMenuContent} data-testid="mobile-menu">
-            <Link to="/paseadores" style={styles.mobileLink} onClick={() => setShowMobileMenu(false)}>Paseadores</Link>
-            <Link to="/" style={styles.mobileLink} onClick={() => setShowMobileMenu(false)}>Cómo funciona</Link>
-            <Link to="/" style={styles.mobileLink} onClick={() => setShowMobileMenu(false)}>Contacto</Link>
-            {user && (
-              <Link to="/mis-reservas" style={styles.mobileLink} onClick={() => setShowMobileMenu(false)}>Mis Reservas</Link>
+            <Link to="/paseadores" style={styles.mobileLink} onClick={() => handleNavClick('/paseadores')}>
+              Paseadores
+            </Link>
+            <Link to="/" style={styles.mobileLink} onClick={() => handleNavClick('/')}>
+              Cómo funciona
+            </Link>
+            <Link to="/" style={styles.mobileLink} onClick={() => handleNavClick('/')}>
+              Contacto
+            </Link>
+            
+            {user ? (
+              <>
+                <div style={styles.mobileDivider}></div>
+                <div style={styles.mobileUserInfo}>
+                  <User size={18} color="#FF6B00" />
+                  <span>{user.name}</span>
+                </div>
+                <Link to="/mis-reservas" style={styles.mobileLink} onClick={() => handleNavClick('/mis-reservas')}>
+                  Mis Reservas
+                </Link>
+                <button style={styles.mobileLogoutBtn} onClick={handleLogout}>
+                  <LogOut size={18} />
+                  <span>Cerrar sesión</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <div style={styles.mobileDivider}></div>
+                <button 
+                  style={styles.mobileLoginBtn} 
+                  onClick={() => {
+                    setShowAuth(true);
+                    setShowMobileMenu(false);
+                  }}
+                >
+                  Iniciar sesión
+                </button>
+                <button 
+                  style={styles.mobileReservarBtn}
+                  onClick={() => handleNavClick('/paseadores')}
+                >
+                  Reservar paseo
+                </button>
+              </>
             )}
           </div>
         )}
