@@ -134,7 +134,7 @@ export default function HeroBooking() {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
-                data-testid=\"address-input\"
+                data-testid="address-input\"
               />
             </div>
 
@@ -145,7 +145,7 @@ export default function HeroBooking() {
                   <Button
                     variant=\"outline\"
                     style={styles.dateButton}
-                    data-testid=\"date-picker\"
+                    data-testid="date-picker\"
                   >
                     <CalendarIcon size={16} style={{ marginRight: '0.5rem' }} />
                     {date ? format(date, 'PPP', { locale: es }) : t('hero.date')}
@@ -171,7 +171,7 @@ export default function HeroBooking() {
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
                 required
-                data-testid=\"time-input\"
+                data-testid="time-input\"
               />
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function HeroBooking() {
                   value={petName}
                   onChange={(e) => setPetName(e.target.value)}
                   required
-                  data-testid=\"pet-name-input\"
+                  data-testid="pet-name-input\"
                 />
               </div>
 
@@ -198,7 +198,7 @@ export default function HeroBooking() {
                   value={petBreed}
                   onChange={(e) => setPetBreed(e.target.value)}
                   required
-                  data-testid=\"pet-breed-input\"
+                  data-testid="pet-breed-input\"
                 />
               </div>
 
@@ -210,7 +210,7 @@ export default function HeroBooking() {
                   value={petWeight}
                   onChange={(e) => setPetWeight(e.target.value)}
                   required
-                  data-testid=\"pet-weight-input\"
+                  data-testid="pet-weight-input\"
                 />
               </div>
 
@@ -221,7 +221,7 @@ export default function HeroBooking() {
                   type=\"number\"
                   value={petAge}
                   onChange={(e) => setPetAge(e.target.value)}
-                  data-testid=\"pet-age-input\"
+                  data-testid="pet-age-input\"
                 />
               </div>
             </div>
@@ -233,7 +233,7 @@ export default function HeroBooking() {
                 value={additionalInfo}
                 onChange={(e) => setAdditionalInfo(e.target.value)}
                 rows={3}
-                data-testid=\"additional-info-textarea\"
+                data-testid="additional-info-textarea\"
               />
             </div>
           </div>
@@ -243,7 +243,7 @@ export default function HeroBooking() {
             onClick={handleBooking}
             style={styles.bookButton}
             className=\"w-full\"
-            data-testid=\"book-now-btn\"
+            data-testid="book-now-btn\"
           >
             {t('hero.bookNow')}
           </Button>
