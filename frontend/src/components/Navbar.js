@@ -122,6 +122,14 @@ export default function Navbar() {
                   >
                     <UserCircle size={20} />
                   </button>
+                  <button
+                    onClick={logout}
+                    style={{...styles.iconButton, color: '#EF4444'}}
+                    data-testid="nav-logout"
+                    title="Cerrar sesión"
+                  >
+                    <LogOut size={20} />
+                  </button>
                 </div>
               </>
             ) : (
