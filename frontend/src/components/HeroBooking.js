@@ -127,14 +127,14 @@ export default function HeroBooking() {
           {/* Address, Date, Time */}
           <div style={styles.gridSection}>
             <div style={styles.fieldGroup}>
-              <Label htmlFor=\"address\">{t('hero.address')}*</Label>
+              <Label htmlFor="address">{t('hero.address')}*</Label>
               <Input
-                id=\"address\"
+                id="address"
                 placeholder={t('hero.addressPlaceholder')}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
-                data-testid="address-input\"
+                data-testid="address-input"
               />
             </div>
 
@@ -143,17 +143,17 @@ export default function HeroBooking() {
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    variant=\"outline\"
+                    variant="outline"
                     style={styles.dateButton}
-                    data-testid="date-picker\"
+                    data-testid="date-picker"
                   >
                     <CalendarIcon size={16} style={{ marginRight: '0.5rem' }} />
                     {date ? format(date, 'PPP', { locale: es }) : t('hero.date')}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent align=\"start\">
+                <PopoverContent align="start">
                   <Calendar
-                    mode=\"single\"
+                    mode="single"
                     selected={date}
                     onSelect={setDate}
                     disabled={(date) => date < new Date()}
@@ -164,14 +164,14 @@ export default function HeroBooking() {
             </div>
 
             <div style={styles.fieldGroup}>
-              <Label htmlFor=\"time\">{t('hero.time')}*</Label>
+              <Label htmlFor="time">{t('hero.time')}*</Label>
               <Input
-                id=\"time\"
-                type=\"time\"
+                id="time"
+                type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
                 required
-                data-testid="time-input\"
+                data-testid="time-input"
               />
             </div>
           </div>
@@ -181,59 +181,59 @@ export default function HeroBooking() {
             <Label style={styles.sectionLabel}>{t('hero.petInfo')}</Label>
             <div style={styles.gridSection}>
               <div style={styles.fieldGroup}>
-                <Label htmlFor=\"pet-name\">{t('hero.petName')}*</Label>
+                <Label htmlFor="pet-name">{t('hero.petName')}*</Label>
                 <Input
-                  id=\"pet-name\"
+                  id="pet-name"
                   value={petName}
                   onChange={(e) => setPetName(e.target.value)}
                   required
-                  data-testid="pet-name-input\"
+                  data-testid="pet-name-input"
                 />
               </div>
 
               <div style={styles.fieldGroup}>
-                <Label htmlFor=\"pet-breed\">{t('hero.petBreed')}*</Label>
+                <Label htmlFor="pet-breed">{t('hero.petBreed')}*</Label>
                 <Input
-                  id=\"pet-breed\"
+                  id="pet-breed"
                   value={petBreed}
                   onChange={(e) => setPetBreed(e.target.value)}
                   required
-                  data-testid="pet-breed-input\"
+                  data-testid="pet-breed-input"
                 />
               </div>
 
               <div style={styles.fieldGroup}>
-                <Label htmlFor=\"pet-weight\">{t('hero.petWeight')}*</Label>
+                <Label htmlFor="pet-weight">{t('hero.petWeight')}*</Label>
                 <Input
-                  id=\"pet-weight\"
-                  type=\"number\"
+                  id="pet-weight"
+                  type="number"
                   value={petWeight}
                   onChange={(e) => setPetWeight(e.target.value)}
                   required
-                  data-testid="pet-weight-input\"
+                  data-testid="pet-weight-input"
                 />
               </div>
 
               <div style={styles.fieldGroup}>
-                <Label htmlFor=\"pet-age\">{t('hero.petAge')}</Label>
+                <Label htmlFor="pet-age">{t('hero.petAge')}</Label>
                 <Input
-                  id=\"pet-age\"
-                  type=\"number\"
+                  id="pet-age"
+                  type="number"
                   value={petAge}
                   onChange={(e) => setPetAge(e.target.value)}
-                  data-testid="pet-age-input\"
+                  data-testid="pet-age-input"
                 />
               </div>
             </div>
 
             <div style={styles.fieldGroup}>
-              <Label htmlFor=\"additional-info\">{t('hero.additionalInfo')}</Label>
+              <Label htmlFor="additional-info">{t('hero.additionalInfo')}</Label>
               <Textarea
-                id=\"additional-info\"
+                id="additional-info"
                 value={additionalInfo}
                 onChange={(e) => setAdditionalInfo(e.target.value)}
                 rows={3}
-                data-testid="additional-info-textarea\"
+                data-testid="additional-info-textarea"
               />
             </div>
           </div>
@@ -242,8 +242,8 @@ export default function HeroBooking() {
           <Button
             onClick={handleBooking}
             style={styles.bookButton}
-            className=\"w-full\"
-            data-testid="book-now-btn\"
+            className="w-full"
+            data-testid="book-now-btn"
           >
             {t('hero.bookNow')}
           </Button>
