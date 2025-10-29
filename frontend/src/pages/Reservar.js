@@ -261,7 +261,7 @@ export default function Reservar() {
           </div>
 
           {/* Right: Summary */}
-          <div style={styles.summarySection}>
+          <div style={styles.summarySection} className="reservar-summary">
             <div style={styles.summaryCard}>
               <h3 style={styles.summaryTitle}>Resumen de la reserva</h3>
 
