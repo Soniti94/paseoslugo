@@ -1,5 +1,14 @@
 /* Responsive Utilities */
 
+/* HeroBooking Component */
+@media (max-width: 768px) {
+  .hero-booking-content {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 2rem 1rem !important;
+  }
+}
+
 /* Navbar Responsive */
 @media (max-width: 768px) {
   .desktop-only {
