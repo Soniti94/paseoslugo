@@ -749,8 +749,7 @@ async def stripe_webhook(request: Request):
     body = await request.body()
     signature = request.headers.get("Stripe-Signature")
     
-    host_url = os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:8001')
-    webhook_url = f"{host_url}/api/webhook/stripe"
+    webhook_url = f"{BACKEND_URL}/api/webhook/stripe"
     stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
     
     try:
