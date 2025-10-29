@@ -39,9 +39,9 @@ export default function PaseadorPerfil() {
   return (
     <div style={styles.page}>
       <div className="container">
-        <div style={styles.grid}>
+        <div style={styles.grid} className="perfil-grid">
           {/* Left Column */}
-          <div style={styles.leftColumn}>
+          <div style={styles.leftColumn} className="perfil-left">
             <div style={styles.profileCard}>
               <div style={styles.avatarContainer}>
                 <img
