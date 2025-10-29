@@ -57,6 +57,29 @@ export default function Navbar() {
     setShowMobileMenu(false);
   };
 
+  const handleHowItWorksClick = (e) => {
+    e.preventDefault();
+    setShowMobileMenu(false);
+    
+    // Si no estamos en la landing, navegar primero
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Esperar a que la página cargue y luego hacer scroll
+      setTimeout(() => {
+        const section = document.getElementById('como-funciona');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      // Ya estamos en landing, solo hacer scroll
+      const section = document.getElementById('como-funciona');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   return (
     <>
       <nav style={styles.navbar}>
