@@ -141,7 +141,7 @@ export default function Reservar() {
       <div className="container">
         <h1 style={styles.title} data-testid="reservar-title">Reservar paseo con {walker.user_name}</h1>
 
-        <div style={styles.grid}>
+        <div style={styles.grid} className="reservar-grid">
           {/* Left: Form */}
           <div style={styles.formSection}>
             <form onSubmit={handleSubmit} style={styles.form}>
