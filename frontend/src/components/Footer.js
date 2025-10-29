@@ -1,11 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer style={styles.footer}>
       <div className="container">
         <div style={styles.copyright}>
-          <p>© 2025 PaseosLugo. Todos los derechos reservados.</p>
+          <p>© 2025 PaseosLugo. {t('footer.rights')}</p>
+          <div style={styles.links}>
+            <Link to="/privacidad" style={styles.link}>{t('footer.privacy')}</Link>
+            <span style={styles.separator}>•</span>
+            <Link to="/terminos" style={styles.link}>{t('footer.terms')}</Link>
+            <span style={styles.separator}>•</span>
+            <Link to="/cookies" style={styles.link}>{t('footer.cookies')}</Link>
+          </div>
         </div>
       </div>
     </footer>
