@@ -78,6 +78,7 @@ export default function Seguimiento() {
           <div style={styles.mapSection}>
             <GoogleMap
               mapContainerStyle={styles.map}
+              mapContainerClassName="seguimiento-map"
               center={center}
               zoom={15}
               options={{
