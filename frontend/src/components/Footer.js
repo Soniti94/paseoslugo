@@ -35,4 +35,21 @@ const styles = {
     fontSize: '0.9375rem',
     color: '#CBD5E1',
   },
+  links: {
+    marginTop: '0.5rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '0.5rem',
+  },
+  link: {
+    color: '#CBD5E1',
+    textDecoration: 'none',
+    fontSize: '0.875rem',
+    transition: 'color 0.2s',
+  },
+  separator: {
+    color: '#64748B',
+    fontSize: '0.875rem',
+  },
 };
