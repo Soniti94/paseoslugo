@@ -167,7 +167,7 @@ export default function Reservar() {
 
               <div style={styles.formGroup}>
                 <Label>Tipo de servicio</Label>
-                <div style={styles.serviceOptions}>
+                <div style={styles.serviceOptions} className="reservar-service-options">
                   {Object.entries(SERVICES).map(([key, service]) => (
                     <div
                       key={key}
