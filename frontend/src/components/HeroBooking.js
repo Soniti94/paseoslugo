@@ -107,7 +107,7 @@ export default function HeroBooking() {
                   ...(serviceType === 'walk' ? styles.serviceButtonActive : {}),
                 }}
                 onClick={() => setServiceType('walk')}
-                data-testid=\"service-walk\"
+                data-testid="service-walk"
               >
                 {t('hero.walkService')}
               </button>
@@ -117,7 +117,7 @@ export default function HeroBooking() {
                   ...(serviceType === 'home_care' ? styles.serviceButtonActive : {}),
                 }}
                 onClick={() => setServiceType('home_care')}
-                data-testid=\"service-home-care\"
+                data-testid="service-home-care"
               >
                 {t('hero.homeCareService')}
               </button>
