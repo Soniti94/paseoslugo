@@ -235,6 +235,13 @@ def create_jwt_token(user_id: str) -> str:
 
 @api_router.post("/auth/register")
 async def register(input: RegisterInput):
+    # SOLO PERMITIR REGISTRO COMO CLIENTE
+    if input.role == "walker":
+        raise HTTPException(400, "El registro como paseador no está disponible en este momento")
+    
+    # Force role to be owner for all new registrations
+    input.role = "owner"
+    
     # Check if user exists
     existing = await db.users.find_one({"email": input.email})
     if existing:
