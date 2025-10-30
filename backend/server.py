@@ -126,6 +126,17 @@ class PaymentTransaction(BaseModel):
     metadata: Dict[str, Any] = {}
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+class SimpleBooking(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    service_type: str
+    date: str
+    time: str
+    contact: Dict[str, Any]
+    pet_details: Optional[str] = None
+    status: str = "pending"  # pending, confirmed, completed, cancelled
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 class Message(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
