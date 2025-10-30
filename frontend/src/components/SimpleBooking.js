@@ -58,7 +58,7 @@ export default function SimpleBooking() {
       toast.success('¡Solicitud enviada! Te contactaremos pronto para confirmar.');
       
       // Reset form
-      setServiceType('Dog Walking');
+      setServiceType('Paseo de perro');
       setDate('');
       setTime('');
       setShowContactForm(false);
