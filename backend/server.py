@@ -186,6 +186,14 @@ class CreateMessageInput(BaseModel):
     message: str
     booking_id: Optional[str] = None
 
+class SimpleBookingInput(BaseModel):
+    service_type: str
+    date: str
+    time: str
+    contact: Dict[str, Any]
+    pet_details: Optional[str] = None
+    status: str = "pending"
+
 # ============ HELPER FUNCTIONS ============
 
 async def get_current_user(authorization: Optional[str] = Header(None), cookie_session: Optional[str] = None) -> Optional[User]:
