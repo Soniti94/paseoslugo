@@ -10,7 +10,7 @@ import axios from 'axios';
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function SimpleBooking() {
-  const [serviceType, setServiceType] = useState('Dog Walking');
+  const [serviceType, setServiceType] = useState('Paseo de perro');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [showContactForm, setShowContactForm] = useState(false);
