@@ -816,6 +816,34 @@ async def get_unread_count(authorization: Optional[str] = Header(None)):
     count = await db.messages.count_documents({"recipient_id": user.id, "read": False})
     return {"count": count}
 
+# ============ SIMPLE BOOKINGS ROUTES ============
+
+@api_router.post("/simple-bookings")
+async def create_simple_booking(input: SimpleBookingInput):
+    """Create a simple booking without authentication"""
+    
+    booking = SimpleBooking(
+        service_type=input.service_type,
+        date=input.date,
+        time=input.time,
+        contact=input.contact,
+        pet_details=input.pet_details,
+        status=input.status
+    )
+    
+    doc = booking.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.simple_bookings.insert_one(doc)
+    
+    return {"message": "Booking request received", "booking_id": booking.id}
+
+@api_router.get("/simple-bookings")
+async def get_simple_bookings():
+    """Get all simple bookings - admin only for now"""
+    
+    bookings = await db.simple_bookings.find({}, {"_id": 0}).sort("created_at", -1).to_list(100)
+    return bookings
+
 # ============ PAYMENTS ROUTES ============
 
 PACKAGES = {
