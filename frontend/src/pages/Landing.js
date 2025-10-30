@@ -11,7 +11,7 @@ export default function Landing() {
   return (
     <div style={styles.landing}>
       {/* Hero Section with Booking */}
-      <HeroBooking />
+      <SimpleBooking />
 
       {/* How it Works */}
       <section id="como-funciona" style={styles.howItWorks} data-testid="how-it-works-section">
