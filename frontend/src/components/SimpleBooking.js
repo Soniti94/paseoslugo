@@ -196,37 +196,37 @@ export default function SimpleBooking() {
         </div>
 
         <Card style={styles.bookingCard}>
-          <h2 style={styles.cardTitle}>Book Your Service</h2>
+          <h2 style={styles.cardTitle}>Reserva tu servicio</h2>
           
           <div style={styles.form}>
             <div style={styles.fieldGroup}>
-              <Label style={styles.fieldLabel}>Service Type</Label>
+              <Label style={styles.fieldLabel}>Tipo de servicio</Label>
               <div style={styles.serviceButtons}>
                 <button
                   type="button"
-                  onClick={() => setServiceType('Dog Walking')}
+                  onClick={() => setServiceType('Paseo de perro')}
                   style={{
                     ...styles.serviceButton,
-                    ...(serviceType === 'Dog Walking' ? styles.serviceButtonActive : {})
+                    ...(serviceType === 'Paseo de perro' ? styles.serviceButtonActive : {})
                   }}
                 >
-                  Dog Walking
+                  Paseo de perro
                 </button>
                 <button
                   type="button"
-                  onClick={() => setServiceType('Pet Sitting')}
+                  onClick={() => setServiceType('Cuidado de mascota')}
                   style={{
                     ...styles.serviceButton,
-                    ...(serviceType === 'Pet Sitting' ? styles.serviceButtonActive : {})
+                    ...(serviceType === 'Cuidado de mascota' ? styles.serviceButtonActive : {})
                   }}
                 >
-                  Pet Sitting
+                  Cuidado de mascota
                 </button>
               </div>
             </div>
 
             <div style={styles.fieldGroup}>
-              <Label htmlFor="date" style={styles.fieldLabel}>Date</Label>
+              <Label htmlFor="date" style={styles.fieldLabel}>Fecha</Label>
               <div style={styles.inputGroup}>
                 <Calendar size={18} style={styles.inputIcon} />
                 <Input
@@ -241,7 +241,7 @@ export default function SimpleBooking() {
             </div>
 
             <div style={styles.fieldGroup}>
-              <Label htmlFor="time" style={styles.fieldLabel}>Time</Label>
+              <Label htmlFor="time" style={styles.fieldLabel}>Hora</Label>
               <div style={styles.inputGroup}>
                 <Clock size={18} style={styles.inputIcon} />
                 <Input
@@ -259,7 +259,7 @@ export default function SimpleBooking() {
               style={styles.findButton}
               className="w-full"
             >
-              Find Available Walkers
+              Buscar paseadores
             </Button>
           </div>
         </Card>
