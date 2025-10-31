@@ -969,7 +969,7 @@ async def stripe_webhook(request: Request):
     signature = request.headers.get("Stripe-Signature")
     
     try:
-    # Verify webhook signature
+        # Verify webhook signature
         event = stripe.Webhook.construct_event(
             body, signature, STRIPE_WEBHOOK_SECRET
         )
