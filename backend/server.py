@@ -29,6 +29,7 @@ STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY')
 GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 BACKEND_URL = os.environ.get('BACKEND_URL', 'http://localhost:8001')
 EMERGENT_AUTH_URL = os.environ.get('EMERGENT_AUTH_URL', 'https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data')
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 
 # Create the main app
 app = FastAPI()
