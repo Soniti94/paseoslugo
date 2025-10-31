@@ -13,8 +13,7 @@ from datetime import datetime, timezone, timedelta
 import jwt
 import bcrypt
 import base64
-from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionResponse, CheckoutStatusResponse, CheckoutSessionRequest
-import requests
+import stripe
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -873,14 +872,27 @@ async def create_checkout_session(input: CreateCheckoutInput, authorization: Opt
     # Create Stripe checkout
     host_url = BACKEND_URL
     webhook_url = f"{host_url}/api/webhook/stripe"
-    stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
-    
+
+    # Initialize Stripe
+    stripe.api_key = STRIPE_API_KEY
+
     success_url = f"{input.origin_url}/pago-exitoso?session_id={{{{CHECKOUT_SESSION_ID}}}}"
     cancel_url = f"{input.origin_url}/reservar/{booking['walker_id']}"
-    
-    checkout_request = CheckoutSessionRequest(
-        amount=amount,
-        currency="eur",
+
+    # Create Stripe checkout session
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency': 'eur',
+                'product_data': {
+                    'name': 'Reserva de paseo',
+                },
+                'unit_amount': int(amount * 100),  # Stripe usa centavos
+            },
+            'quantity': 1,
+        }],
+        mode='payment',
         success_url=success_url,
         cancel_url=cancel_url,
         metadata={
@@ -888,12 +900,9 @@ async def create_checkout_session(input: CreateCheckoutInput, authorization: Opt
             "user_id": user.id
         }
     )
-    
-    session: CheckoutSessionResponse = await stripe_checkout.create_checkout_session(checkout_request)
-    
     # Create payment transaction
     transaction = PaymentTransaction(
-        session_id=session.session_id,
+        session_id=session.id,
         booking_id=input.booking_id,
         user_id=user.id,
         amount=amount,
@@ -907,7 +916,7 @@ async def create_checkout_session(input: CreateCheckoutInput, authorization: Opt
     doc['created_at'] = doc['created_at'].isoformat()
     await db.payment_transactions.insert_one(doc)
     
-    return {"url": session.url, "session_id": session.session_id}
+    return {"url": session.url, "session_id": session.id}
 
 @api_router.get("/payments/checkout/status/{session_id}")
 async def get_checkout_status(session_id: str, authorization: Optional[str] = Header(None)):
@@ -928,7 +937,7 @@ async def get_checkout_status(session_id: str, authorization: Optional[str] = He
     stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
     
     try:
-        checkout_status: CheckoutStatusResponse = await stripe_checkout.get_checkout_status(session_id)
+        checkout_status = stripe.checkout.Session.retrieve(session_id)
         
         # Update transaction if paid
         if checkout_status.payment_status == 'paid' and transaction['payment_status'] != 'paid':
@@ -958,18 +967,21 @@ async def stripe_webhook(request: Request):
     body = await request.body()
     signature = request.headers.get("Stripe-Signature")
     
-    webhook_url = f"{BACKEND_URL}/api/webhook/stripe"
-    stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
-    
     try:
-        webhook_response = await stripe_checkout.handle_webhook(body, signature)
+    # Verify webhook signature
+    event = stripe.Webhook.construct_event(
+        body, signature, STRIPE_WEBHOOK_SECRET
+    )
+
+    # Get session from webhook event
+    webhook_response = event['data']['object']
         
-        if webhook_response.payment_status == 'paid':
+        if event['type'] == 'checkout.session.completed':
             # Update transaction
-            transaction = await db.payment_transactions.find_one({"session_id": webhook_response.session_id})
+            transaction = await db.payment_transactions.find_one({"session_id": webhook_response.id})
             if transaction and transaction['payment_status'] != 'paid':
                 await db.payment_transactions.update_one(
-                    {"session_id": webhook_response.session_id},
+                    {"session_id": webhook_response.id},
                     {"$set": {"payment_status": "paid", "status": "completed"}}
                 )
                 
