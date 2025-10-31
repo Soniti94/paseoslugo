@@ -970,9 +970,9 @@ async def stripe_webhook(request: Request):
     
     try:
     # Verify webhook signature
-    event = stripe.Webhook.construct_event(
-        body, signature, STRIPE_WEBHOOK_SECRET
-    )
+        event = stripe.Webhook.construct_event(
+            body, signature, STRIPE_WEBHOOK_SECRET
+        )
 
     # Get session from webhook event
     webhook_response = event['data']['object']
