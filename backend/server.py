@@ -28,7 +28,7 @@ JWT_SECRET = os.environ.get('JWT_SECRET')
 STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY')
 GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 BACKEND_URL = os.environ.get('BACKEND_URL', 'http://localhost:8001')
-EMERGENT_AUTH_URL = os.environ.get('EMERGENT_AUTH_URL', 'https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data')
+# EMERGENT_AUTH_URL = os.environ.get('EMERGENT_AUTH_URL', 'https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data')
 STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 
 # Create the main app
@@ -356,21 +356,21 @@ async def update_profile(input: UpdateProfileInput, authorization: Optional[str]
     return User(**user_doc).model_dump()
 
 @api_router.post("/auth/session")
-async def create_session_from_emergent(session_id: str = Header(None, alias="X-Session-ID"), response: Response = None):
-    """Exchange Emergent session_id for user data and create session"""
-    if not session_id:
-        raise HTTPException(400, "X-Session-ID header required")
+# async def create_session_from_emergent(session_id: str = Header(None, alias="X-Session-ID"), response: Response = None):
+   # """Exchange Emergent session_id for user data and create session"""
+   # if not session_id:
+    #    raise HTTPException(400, "X-Session-ID header required")
     
     # Call Emergent API
-    try:
-        resp = requests.get(
-            EMERGENT_AUTH_URL,
-            headers={"X-Session-ID": session_id}
-        )
-        resp.raise_for_status()
-        session_data = resp.json()
-    except Exception as e:
-        raise HTTPException(400, f"Failed to get session data: {str(e)}")
+   # try:
+       # resp = requests.get(
+         #   EMERGENT_AUTH_URL,
+        #    headers={"X-Session-ID": session_id}
+        # )
+       # resp.raise_for_status()
+      #  session_data = resp.json()
+    # except Exception as e:
+       # raise HTTPException(400, f"Failed to get session data: {str(e)}")
     
     email = session_data.get('email')
     name = session_data.get('name')
