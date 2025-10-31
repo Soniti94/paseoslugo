@@ -372,52 +372,52 @@ async def update_profile(input: UpdateProfileInput, authorization: Optional[str]
     # except Exception as e:
        # raise HTTPException(400, f"Failed to get session data: {str(e)}")
     
-    email = session_data.get('email')
-    name = session_data.get('name')
-    picture = session_data.get('picture')
-    session_token = session_data.get('session_token')
+   # email = session_data.get('email')
+   # name = session_data.get('name')
+   # picture = session_data.get('picture')
+   # session_token = session_data.get('session_token')
     
-    # Check if user exists
-    user_doc = await db.users.find_one({"email": email}, {"_id": 0})
+     # Check if user exists
+   # user_doc = await db.users.find_one({"email": email}, {"_id": 0})
     
-    if not user_doc:
+   # if not user_doc:
         # Create new user
-        user = User(
-            email=email,
-            name=name,
-            picture=picture,
-            role="owner"
-        )
-        doc = user.model_dump()
-        doc['created_at'] = doc['created_at'].isoformat()
-        await db.users.insert_one(doc)
-    else:
-        user = User(**user_doc)
+    #    user = User(
+     #       email=email,
+      #      name=name,
+       #     picture=picture,
+       #     role="owner"
+       # )
+       # doc = user.model_dump()
+       # doc['created_at'] = doc['created_at'].isoformat()
+       # await db.users.insert_one(doc)
+   # else:
+    #    user = User(**user_doc)
     
     # Create session
-    session = UserSession(
-        session_token=session_token,
-        user_id=user.id,
-        expires_at=datetime.now(timezone.utc) + timedelta(days=7)
-    )
+   # session = UserSession(
+    #    session_token=session_token,
+     #   user_id=user.id,
+      #  expires_at=datetime.now(timezone.utc) + timedelta(days=7)
+   # )
     
-    session_doc = session.model_dump()
-    session_doc['created_at'] = session_doc['created_at'].isoformat()
-    session_doc['expires_at'] = session_doc['expires_at'].isoformat()
-    await db.user_sessions.insert_one(session_doc)
+    #session_doc = session.model_dump()
+    #session_doc['created_at'] = session_doc['created_at'].isoformat()
+    #session_doc['expires_at'] = session_doc['expires_at'].isoformat()
+    #await db.user_sessions.insert_one(session_doc)
     
     # Set cookie
-    response.set_cookie(
-        key="session_token",
-        value=session_token,
-        httponly=True,
-        secure=True,
-        samesite="none",
-        max_age=7*24*60*60,
-        path="/"
-    )
+    #response.set_cookie(
+     #   key="session_token",
+      #  value=session_token,
+       # httponly=True,
+        #secure=True,
+        #samesite="none",
+        #max_age=7*24*60*60,
+        #path="/"
+    #)
     
-    return {"token": session_token, "user": user.model_dump()}
+   # return {"token": session_token, "user": user.model_dump()}
 
 @api_router.post("/auth/logout")
 async def logout(authorization: Optional[str] = Header(None), response: Response = None):
