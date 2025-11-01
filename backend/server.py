@@ -974,8 +974,8 @@ async def stripe_webhook(request: Request):
             body, signature, STRIPE_WEBHOOK_SECRET
         )
 
-    # Get session from webhook event
-    webhook_response = event['data']['object']
+        # Get session from webhook event
+        webhook_response = event['data']['object']
         
         if event['type'] == 'checkout.session.completed':
             # Update transaction
