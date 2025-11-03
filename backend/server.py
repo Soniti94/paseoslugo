@@ -68,7 +68,7 @@ class Walker(BaseModel):
     reviews_count: int = 0
     availability: str = "Disponible hoy"
     location: str = "Centro de Lugo"
-    price_from: float = 15.0
+    price_from: float = 4.0
     is_verified: bool = True
     profile_image: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
