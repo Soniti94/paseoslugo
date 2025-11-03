@@ -18,12 +18,31 @@ body {
   position: relative;
 }
 
-/* Solución para el modal */
-.modal, [class*="modal"], [class*="dialog"], [class*="popup"] {
+/* Solución para el modal responsive */
+.modal, [class*="modal"], [class="dialog"], [class*="popup"], [role="dialog"] {
   max-width: 90vw !important;
   margin: 0 auto !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
+  box-sizing: border-box !important;
+}
+
+/* Ajustes adicionales para pantallas pequeñas */
+@media (max-width: 640px) {
+  [role="dialog"] {
+    width: 90vw !important;
+    max-width: 90vw !important;
+    padding: 1rem !important;
+  }
+
+  [role="dialog"] * {
+    box-sizing: border-box !important;
+  }
+
+  [role="dialog"] input,
+  [role="dialog"] button {
+    font-size: 0.875rem !important;
+  }
 }
 
 body {
