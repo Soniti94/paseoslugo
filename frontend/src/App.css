@@ -167,3 +167,29 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem; /* Reduce el padding de las cards */
   }
 }
+
+/* Fix DEFINITIVO para modal responsive - DEBE IR AL FINAL */
+[data-radix-popper-content-wrapper],
+[data-radix-portal] {
+  max-width: 100vw !important;
+}
+
+[role="dialog"][data-state="open"] {
+  width: 90vw !important;
+  max-width: 90vw !important;
+  left: 5vw !important;
+  right: 5vw !important;
+  transform: translateX(0) translateY(-50%) !important;
+  margin: 0 !important;
+  padding: 1rem !important;
+}
+
+@media (max-width: 640px) {
+  [role="dialog"][data-state="open"] {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    left: 2.5vw !important;
+    right: 2.5vw !important;
+    padding: 0.75rem !important;
+  }
+}
