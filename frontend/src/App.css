@@ -142,3 +142,25 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.875rem;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem; /* Reduce el padding a la mitad */
+    max-width: 100%;
+  }
+
+  .section-subtitle {
+    font-size: 0.875rem;
+    max-width: 100%;
+    padding: 0 0.5rem; /* Añade esto si .section-subtitle también causa problemas */
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 0.625rem 1rem; /* Reduce el padding de los botones */
+    font-size: 0.875rem;
+  }
+
+  .card {
+    padding: 1rem; /* Reduce el padding de las cards */
+  }
+}
