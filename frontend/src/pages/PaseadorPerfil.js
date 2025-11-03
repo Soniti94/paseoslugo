@@ -119,7 +119,7 @@ export default function PaseadorPerfil() {
               <div style={styles.servicesGrid} className="perfil-services-grid">
                 <div style={styles.serviceCard}>
                   <h4 style={styles.serviceTitle}>Paseo Básico</h4>
-                  <p style={styles.servicePrice}>15€</p>
+                  <p style={styles.servicePrice}>6€</p>
                   <p style={styles.serviceDuration}>30 minutos</p>
                   <ul style={styles.serviceFeatures}>
                     <li>Paseo por el barrio</li>
@@ -131,7 +131,7 @@ export default function PaseadorPerfil() {
                 <div style={{...styles.serviceCard, ...styles.popularService}}>
                   <div style={styles.popularBadge}>Más popular</div>
                   <h4 style={styles.serviceTitle}>Paseo Estándar</h4>
-                  <p style={styles.servicePrice}>22€</p>
+                  <p style={styles.servicePrice}>8€</p>
                   <p style={styles.serviceDuration}>45 minutos</p>
                   <ul style={styles.serviceFeatures}>
                     <li>Parque o zona verde</li>
@@ -142,7 +142,7 @@ export default function PaseadorPerfil() {
 
                 <div style={styles.serviceCard}>
                   <h4 style={styles.serviceTitle}>Paseo Premium</h4>
-                  <p style={styles.servicePrice}>30€</p>
+                  <p style={styles.servicePrice}>10€</p>
                   <p style={styles.serviceDuration}>60 minutos</p>
                   <ul style={styles.serviceFeatures}>
                     <li>Actividades de juego</li>
