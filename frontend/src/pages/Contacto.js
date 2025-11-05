@@ -16,20 +16,40 @@ export default function Contacto() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+// Reemplaza tu handleSubmit por este
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    // Simulate sending (in production, this would call backend)
-    setTimeout(() => {
-      toast.success(t('contact.success') || '¡Mensaje enviado! Te responderemos pronto.');
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
-      setLoading(false);
-    }, 1000);
-  };
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        // concateno el asunto en el mensaje para que llegue todo
+        message: subject ? `[${subject}] ${message}` : message,
+      }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data?.error || 'Error enviando el mensaje');
+    }
+
+    toast.success(t('contact.success') || '¡Mensaje enviado! Te responderemos pronto.');
+    setName('');
+    setEmail('');
+    setSubject('');
+    setMessage('');
+  } catch (err) {
+    console.error(err);
+    toast.error(t('contact.error') || 'No se pudo enviar. Intenta de nuevo.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div style={styles.page}>
@@ -84,6 +104,7 @@ export default function Contacto() {
                 <Label htmlFor="name">{t('contact.name') || 'Nombre'}</Label>
                 <Input
                   id="name"
+                  name="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
@@ -95,6 +116,7 @@ export default function Contacto() {
                 <Label htmlFor="email">{t('contact.email') || 'Email'}</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -107,6 +129,7 @@ export default function Contacto() {
                 <Label htmlFor="subject">{t('contact.subject') || 'Asunto'}</Label>
                 <Input
                   id="subject"
+                  name="subject"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   required
@@ -118,6 +141,7 @@ export default function Contacto() {
                 <Label htmlFor="message">{t('contact.message') || 'Mensaje'}</Label>
                 <Textarea
                   id="message"
+                  name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
