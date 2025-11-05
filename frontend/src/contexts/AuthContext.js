@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Initialize auth on app start
   useEffect(() => {
     const initAuth = async () => {
       const savedToken = localStorage.getItem('token');
