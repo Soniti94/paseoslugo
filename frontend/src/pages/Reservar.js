@@ -17,9 +17,9 @@ import { toast } from 'sonner';
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const SERVICES = {
-  basico: { name: 'Paseo Básico', price: 15.0, duration: 30 },
-  estandar: { name: 'Paseo Estándar', price: 22.0, duration: 45 },
-  premium: { name: 'Paseo Premium', price: 30.0, duration: 60 },
+  basico: { name: 'Paseo Básico', price: 6.0, duration: 30 },
+  estandar: { name: 'Paseo Estándar', price: 8.0, duration: 45 },
+  premium: { name: 'Paseo Premium', price: 10.0, duration: 60 },
   especial: { name: 'Cuidado Especial', price: 25.0, duration: 45 },
 };
 
