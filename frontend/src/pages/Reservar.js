@@ -20,7 +20,7 @@ const SERVICES = {
   basico: { name: 'Paseo Básico', price: 6.0, duration: 30 },
   estandar: { name: 'Paseo Estándar', price: 8.0, duration: 45 },
   premium: { name: 'Paseo Premium', price: 10.0, duration: 60 },
-  especial: { name: 'Cuidado Especial', price: 25.0, duration: 45 },
+  especial: { name: 'Cuidado Especial', price: 15.0, duration: 45 },
 };
 
 export default function Reservar() {
